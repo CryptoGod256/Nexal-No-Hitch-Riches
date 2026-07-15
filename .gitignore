@@ -216,3 +216,30 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- B2B AI Automation Business Protections ---
+
+# 1. Secret/Environment Protection
+.env
+secrets.json
+*.pem
+*.key
+
+# 2. Local Database & Data Protection (Essential for Client Privacy)
+*.db
+*.sqlite
+*.sqlite3
+data/
+logs/
+temp/
+
+# 3. Development/Project-Specific
+.venv/
+env/
+venv/
+__pycache__/
+*.pyc
+
+# 4. OS/System Files
+.DS_Store
+Thumbs.db
