@@ -243,3 +243,5 @@ __pycache__/
 # 4. OS/System Files
 .DS_Store
 Thumbs.db
+.env
+credentials.json
