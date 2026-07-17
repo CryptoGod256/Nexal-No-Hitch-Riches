@@ -63,12 +63,6 @@
     97%{opacity:1;}
   }
 
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
-  }
-
-  a{color:inherit;}
-
   /* ---- Terminal chrome bar ---- */
   .term-bar{
     display:flex; align-items:center; gap:8px;
@@ -94,17 +88,6 @@
     position:relative;
     border-bottom:1px solid var(--line);
   }
-  .hero::before{
-    content:"";
-    position:absolute; inset:0;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:42px 42px;
-    opacity:0.35;
-    mask-image:radial-gradient(ellipse at 50% 35%, black 0%, transparent 70%);
-    pointer-events:none;
-  }
   .eyebrow{
     font-family:'Share Tech Mono', monospace;
     color:var(--cyan);
@@ -122,66 +105,12 @@
     font-weight:700;
     font-size:clamp(2.6rem, 9vw, 6.2rem);
     line-height:0.98;
-    letter-spacing:0.02em;
     color:var(--red);
     text-transform:uppercase;
     position:relative;
-    text-shadow:
-      0 0 18px rgba(255,26,43,0.55),
-      0 0 46px rgba(255,26,43,0.18);
   }
-  .glitch-title span{display:block;}
-  .glitch-title .layer{
-    position:absolute; inset:0;
-    display:block;
-  }
-  .glitch-title .layer::before,
-  .glitch-title .layer::after{
-    content:attr(data-text);
-    position:absolute; inset:0;
-    background:var(--bg);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-  }
-
-  /* actual glitch via clip animation on pseudo-copies */
-  .glitch{
-    position:relative;
-    display:inline-block;
-  }
-  .glitch::before,
-  .glitch::after{
-    content:attr(data-text);
-    position:absolute;
-    top:0; left:0; width:100%;
-    overflow:hidden;
-  }
-  .glitch::before{
-    color:var(--cyan);
-    clip-path:inset(0 0 82% 0);
-    animation:glitch-top 4.5s infinite linear;
-    opacity:0.8;
-  }
-  .glitch::after{
-    color:var(--magenta);
-    clip-path:inset(82% 0 0 0);
-    animation:glitch-bottom 4.5s infinite linear;
-    opacity:0.8;
-  }
-  @keyframes glitch-top{
-    0%,88%,100%{transform:translate(0,0); clip-path:inset(0 0 82% 0);}
-    89%{transform:translate(-3px,-1px); clip-path:inset(10% 0 60% 0);}
-    91%{transform:translate(3px,1px); clip-path:inset(40% 0 20% 0);}
-    93%{transform:translate(-2px,0); clip-path:inset(0 0 82% 0);}
-  }
-  @keyframes glitch-bottom{
-    0%,88%,100%{transform:translate(0,0); clip-path:inset(82% 0 0 0);}
-    89%{transform:translate(3px,1px); clip-path:inset(60% 0 10% 0);}
-    91%{transform:translate(-3px,-1px); clip-path:inset(20% 0 40% 0);}
-    93%{transform:translate(2px,0); clip-path:inset(82% 0 0 0);}
-  }
-
+  .glitch{position:relative; display:inline-block;}
+  
   .tagline{
     margin-top:30px;
     font-family:'Share Tech Mono', monospace;
@@ -189,158 +118,35 @@
     font-size:clamp(0.85rem, 1.6vw, 1.05rem);
     letter-spacing:0.12em;
   }
-  .tagline .cursor{
-    display:inline-block;
-    width:8px; height:1em;
-    background:var(--red);
-    margin-left:4px;
-    vertical-align:-2px;
-    animation:blink 1s steps(1) infinite;
-  }
-  @keyframes blink{50%{opacity:0;}}
-
-  .rule{
-    width:min(560px, 82%);
-    height:2px;
-    margin:56px auto 0;
-    background:linear-gradient(90deg, transparent, var(--magenta), var(--magenta), transparent);
-    box-shadow:0 0 12px var(--magenta);
-  }
-
+  
   /* ---- Section shell ---- */
-  section{
-    padding:80px 24px;
-    max-width:920px;
-    margin:0 auto;
-    position:relative;
-  }
-  .section-label{
-    font-family:'Share Tech Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.3em;
-    color:var(--text-dim);
-    text-transform:uppercase;
-    margin-bottom:14px;
-  }
-  h2{
-    font-size:clamp(1.8rem, 4vw, 2.6rem);
-    color:var(--text);
-    font-weight:600;
-    letter-spacing:0.01em;
-    margin-bottom:28px;
-    position:relative;
-    display:inline-block;
-  }
-  h2::after{
-    content:"";
-    position:absolute;
-    left:0; bottom:-10px;
-    width:46px; height:2px;
-    background:var(--red);
-    box-shadow:0 0 8px var(--red);
-  }
+  section{padding:80px 24px; max-width:920px; margin:0 auto; position:relative;}
+  .section-label{font-family:'Share Tech Mono', monospace; font-size:11px; letter-spacing:0.3em; color:var(--text-dim); text-transform:uppercase; margin-bottom:14px;}
+  h2{font-size:clamp(1.8rem, 4vw, 2.6rem); color:var(--text); margin-bottom:28px; position:relative; display:inline-block;}
+  h2::after{content:""; position:absolute; left:0; bottom:-10px; width:46px; height:2px; background:var(--red);}
 
-  .vision-text{
-    font-size:clamp(1rem, 2vw, 1.2rem);
-    line-height:1.75;
-    color:var(--text);
-    max-width:640px;
-    border-left:2px solid var(--red-dim);
-    padding-left:22px;
+  /* ---- Service Marketplace Styles ---- */
+  .search-bar input {
+    width: 100%;
+    padding: 14px 18px;
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    margin-bottom: 20px;
+    outline: none;
   }
-  .vision-text strong{color:var(--red); font-weight:600;}
-
-  /* ---- Operators panel ---- */
-  .panel{
-    background:var(--bg-panel);
-    border:1px solid var(--line);
-    border-radius:2px;
-    padding:0;
-    overflow:hidden;
-    box-shadow:0 0 0 1px rgba(255,26,43,0.05), 0 20px 60px -30px rgba(255,26,43,0.4);
-  }
-  .panel-head{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:12px 18px;
-    background:linear-gradient(180deg,#150609,#0b0308);
-    border-bottom:1px solid var(--line);
-    font-family:'Share Tech Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.2em;
-    color:var(--text-dim);
-    text-transform:uppercase;
-  }
-  .panel-head .live{
-    color:var(--green);
-    display:flex; align-items:center; gap:6px;
-  }
-  .panel-head .live::before{
-    content:"";
-    width:6px; height:6px; border-radius:50%;
-    background:var(--green);
-    box-shadow:0 0 8px var(--green);
-    animation:blink 1.4s steps(1) infinite;
-  }
-  .operator-row{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 22px;
-    border-bottom:1px solid var(--line);
-    font-family:'Share Tech Mono', monospace;
-    font-size:14px;
-  }
-  .operator-row:last-child{border-bottom:none;}
-  .operator-name{
-    display:flex; align-items:center; gap:12px;
-    color:var(--text);
-    letter-spacing:0.04em;
-  }
-  .operator-name .bracket{color:var(--text-dim);}
-  .status-online{
-    color:var(--green);
-    display:flex; align-items:center; gap:8px;
-    text-transform:uppercase;
-    letter-spacing:0.15em;
-    font-size:12px;
-  }
-  .status-online .dot{
-    width:7px; height:7px; border-radius:50%;
-    background:var(--green);
-    box-shadow:0 0 10px var(--green);
-    animation:pulse 1.8s ease-in-out infinite;
-  }
-  @keyframes pulse{
-    0%,100%{transform:scale(1); opacity:1;}
-    50%{transform:scale(1.4); opacity:0.6;}
-  }
-  .operator-row.pending .status-online{color:var(--text-dim);}
-  .operator-row.pending .status-online .dot{background:var(--text-dim); box-shadow:none; animation:none;}
-
-  .panel-foot{
-    padding:12px 18px;
-    font-family:'Share Tech Mono', monospace;
-    font-size:11px;
-    color:var(--text-dim);
-    letter-spacing:0.08em;
-    border-top:1px solid var(--line);
-    background:rgba(255,26,43,0.02);
-  }
+  .service-list { background: var(--bg-panel); border: 1px solid var(--line); border-radius: 2px; }
+  .service-item { display: flex; align-items: center; padding: 18px 22px; border-bottom: 1px solid var(--line); text-decoration: none; transition: background 0.2s; }
+  .service-item:hover { background: rgba(255, 26, 43, 0.05); }
+  .service-icon { width: 40px; height: 40px; background: var(--line); display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 18px; color: var(--cyan); font-weight: bold; }
+  .service-info { flex-grow: 1; }
+  .service-title { color: var(--text); font-weight: 600; margin-bottom: 4px; }
+  .service-status { color: var(--text-dim); font-size: 10px; letter-spacing: 0.1em; }
+  .service-action { color: var(--red); font-size: 20px; }
 
   /* ---- Footer ---- */
-  footer{
-    padding:50px 24px 70px;
-    text-align:center;
-    font-family:'Share Tech Mono', monospace;
-    font-size:12px;
-    color:var(--text-dim);
-    letter-spacing:0.08em;
-    border-top:1px solid var(--line);
-  }
-  footer .prompt{color:var(--red); margin-right:6px;}
-
-  @media (max-width:520px){
-    .term-bar .path{display:none;}
-    section{padding:60px 20px;}
-  }
+  footer{padding:50px 24px 70px; text-align:center; font-family:'Share Tech Mono', monospace; font-size:12px; color:var(--text-dim);}
 </style>
 </head>
 <body>
@@ -348,49 +154,39 @@
   <div class="term-bar">
     <span class="term-dot" style="background:var(--red);"></span>
     <span class="term-dot" style="background:var(--magenta);"></span>
-    <span class="term-dot" style="background:var(--text-dim);"></span>
     <span class="path">root@nexal-intel:~/nexal$</span>
     <span class="clock" id="clock">00:00:00</span>
   </div>
 
   <div class="hero noise-flicker">
     <div class="eyebrow">Nexal Intelligence // Node 07 Authenticated</div>
-    <h1 class="glitch-title">
-      <span class="glitch" data-text="NEXAL">NEXAL</span><br>
-      <span class="glitch" data-text="CORPORATION">CORPORATION</span>
-    </h1>
-    <div class="tagline">POWERED BY NEXAL INTELLIGENCE<span class="cursor"></span></div>
-    <div class="rule"></div>
+    <h1 class="glitch-title">NEXAL<br>CORPORATION</h1>
+    <div class="tagline">POWERED BY NEXAL INTELLIGENCE</div>
   </div>
 
-  <section id="vision">
-    <div class="section-label">01 // Directive</div>
-    <h2>The Vision</h2>
-    <p class="vision-text">
-      Building <strong>scalable AI automation</strong> to manifest financial freedom —
-      autonomous systems, deployed at the edge, working the market while you sleep.
-      No middlemen. No downtime. Just capital in motion.
-    </p>
-  </section>
-
-  <section id="operators">
-    <div class="section-label">02 // Deployment</div>
-    <h2>Active Operators</h2>
-
-    <div class="panel">
-      <div class="panel-head">
-        <span>operator_registry.log</span>
-        <span class="live">live feed</span>
-      </div>
-      <div class="operator-row">
-        <div class="operator-name"><span class="bracket">&gt;</span> Open Claw</div>
-        <div class="status-online"><span class="dot"></span> Online</div>
-      </div>
-      <div class="operator-row pending">
-        <div class="operator-name"><span class="bracket">&gt;</span> Additional Unit</div>
-        <div class="status-online"><span class="dot"></span> Standby</div>
-      </div>
-      <div class="panel-foot">3 slots reserved // Nexal Intelligence cluster 07-A</div>
+  <section id="service-marketplace">
+    <div class="section-label">03 // Asset Registry</div>
+    <h2>Service Access</h2>
+    <div class="search-bar">
+      <input type="text" placeholder="Query accessible tools...">
+    </div>
+    <div class="service-list">
+      <a href="#" class="service-item">
+        <div class="service-icon">A1</div>
+        <div class="service-info">
+          <div class="service-title">Auto-Market Scanner</div>
+          <div class="service-status">[ ACTIVE // RETAINER REQUIRED ]</div>
+        </div>
+        <div class="service-action">&gt;</div>
+      </a>
+      <a href="#" class="service-item">
+        <div class="service-icon">D2</div>
+        <div class="service-info">
+          <div class="service-title">Deep Data Analyzer</div>
+          <div class="service-status">[ LOCKED // SUBSCRIPTION REQUIRED ]</div>
+        </div>
+        <div class="service-action">&gt;</div>
+      </a>
     </div>
   </section>
 
@@ -401,14 +197,10 @@
 <script>
   function tick(){
     const d = new Date();
-    const pad = n => String(n).padStart(2,'0');
-    document.getElementById('clock').textContent =
-      pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+    document.getElementById('clock').textContent = d.toTimeString().split(' ')[0];
   }
-  tick();
   setInterval(tick, 1000);
 </script>
-
 </body>
 </html>
 
