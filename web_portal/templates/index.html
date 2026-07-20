@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NEXAL INTELLIGENCE</title>
+    <style>
+        body { background: #050103; color: #d8d0d2; font-family: monospace; padding: 20px; }
+        .deploy-btn { background: #ff1a2b; color: #160406; padding: 10px; border: none; cursor: pointer; }
+        .deploy-btn.deploying { background: #ffb020; }
+        .deploy-btn.active { background: #050103; color: #39ff8a; border: 1px solid #39ff8a; }
+    </style>
+</head>
+<body>
+    <h1>NEXAL PORTAL</h1>
+    <button class="deploy-btn" data-task="mail_handler">DEPLOY MAIL HANDLER</button>
+    <script>
+      document.querySelectorAll('.deploy-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const task = this.getAttribute('data-task');
+          this.classList.add('deploying');
+          this.innerText = 'DEPLOYING...';
+          fetch(`/deploy/${task}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+              this.classList.remove('deploying');
+              this.classList.add('active');
+              this.innerText = 'RUNNING';
+            });
+        });
+      });
+    </script>
+</body>
+</html>

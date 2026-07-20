@@ -3,3 +3,5 @@
 2026-07-19 18:13:29,083 - Nexal_Engine - INFO - Successfully logged lead: Beta-Entity-02
 [Mon Jul 20 00:25:29 CDT 2026] Assigning task: CODE to operator...
 [Mon Jul 20 00:25:29 CDT 2026] TASK: Core_Initialization | STATUS: SUCCESS | MANDATE_CHECK: PASS
+[Mon Jul 20 01:37:41 CDT 2026] NEXAL Engine Initialized.
+[Mon Jul 20 01:37:41 CDT 2026] Core directories verified.
