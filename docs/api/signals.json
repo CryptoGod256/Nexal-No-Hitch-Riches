@@ -1,0 +1,20 @@
+[
+  {
+    "id": "OP-01",
+    "handle": "@maren_builds",
+    "title": "Weekend arbitrage watcher",
+    "description": "Wired Auto-Market Scanner into a Slack alert on a 15-min interval — only pings past a 2% spread.",
+    "metric": "128",
+    "tool": "Auto-Market Scanner",
+    "timestamp": "2026-07-18T21:00:00Z"
+  },
+  {
+    "id": "OP-02",
+    "handle": "@rhea_ops",
+    "title": "Portfolio drift dashboard",
+    "description": "Flags any position drifting more than 5% from target allocation, straight off Deep Data Analyzer.",
+    "metric": "241",
+    "tool": "Deep Data Analyzer",
+    "timestamp": "2026-07-18T21:05:00Z"
+  }
+]
