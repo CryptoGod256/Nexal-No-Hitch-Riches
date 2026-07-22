@@ -1,0 +1,16 @@
+{
+  "system": "NEXAL_INTELLIGENCE_STRIPE_CLUSTER",
+  "healthStatus": "OPTIMAL",
+  "stripeAPIConnection": "SECURE",
+  "lowEndBillingStatus": "ACTIVE",
+  "highEndRetainerStatus": "ACTIVE",
+  "memoryUsage": {
+    "rss": 40108032,
+    "heapTotal": 6426624,
+    "heapUsed": 3904824,
+    "external": 1522589,
+    "arrayBuffers": 71933
+  },
+  "uptime": 0.239670573,
+  "checkedAt": "2026-07-22T08:47:37.845Z"
+}
