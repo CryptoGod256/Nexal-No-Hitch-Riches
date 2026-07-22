@@ -2,33 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>NEXAL INTELLIGENCE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXAL INTELLIGENCE // Autonomous Infrastructure</title>
     <style>
-        body { background: #050103; color: #d8d0d2; font-family: monospace; padding: 20px; }
-        .deploy-btn { background: #ff1a2b; color: #160406; padding: 10px; border: none; cursor: pointer; }
-        .deploy-btn.deploying { background: #ffb020; }
-        .deploy-btn.active { background: #050103; color: #39ff8a; border: 1px solid #39ff8a; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #030712;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: radial-gradient(circle at center, #0f172a 0%, #030712 100%);
+        }
+        .hero-container {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+        .logo-frame {
+            margin-bottom: 30px;
+        }
+        .logo-frame img {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            margin-bottom: 5px;
+            background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: #38bdf8;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+        p {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+        }
+        .cta-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+            transition: all 0.2s ease-in-out;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.6);
+            background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+        }
     </style>
 </head>
 <body>
-    <h1>NEXAL PORTAL</h1>
-    <button class="deploy-btn" data-task="mail_handler">DEPLOY MAIL HANDLER</button>
-    <script>
-      document.querySelectorAll('.deploy-btn').forEach(button => {
-        button.addEventListener('click', function() {
-          const task = this.getAttribute('data-task');
-          this.classList.add('deploying');
-          this.innerText = 'DEPLOYING...';
-          fetch(`/deploy/${task}`, { method: 'POST' })
-            .then(response => response.json())
-            .then(data => {
-              console.log(data);
-              this.classList.remove('deploying');
-              this.classList.add('active');
-              this.innerText = 'RUNNING';
-            });
-        });
-      });
-    </script>
+    <div class="hero-container">
+        <div class="logo-frame">
+            <img src="assets/images/logo_hero.png" alt="Nexal Intelligence Logo">
+        </div>
+        <h1>NEXAL</h1>
+        <h2>INTELLIGENCE</h2>
+        <p>Autonomous Infrastructure & Multi-Agent Routing Engine</p>
+        <div>
+            <a href="Goal.md" class="cta-btn">Review Mission Roadmap</a>
+        </div>
+    </div>
 </body>
 </html>
