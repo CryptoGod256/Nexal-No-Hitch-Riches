@@ -2,40 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS // STORAGE</title>
+    <title>Nexal Storage Subsystem</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #030712; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; min-height: 100vh; background-image: radial-gradient(circle at center, #0f172a 0%, #030712 100%); }
-        .container { max-width: 800px; margin: 0 auto; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #94a3b8; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-        .back-link:hover { color: #38bdf8; }
-        h1 { font-size: 2.2rem; color: #38bdf8; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
-        p.sub { color: #94a3b8; margin-bottom: 30px; font-size: 1.1rem; }
-        .card { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .card h3 { color: #fff; margin-bottom: 10px; font-size: 1.2rem; }
-        .card p { color: #94a3b8; font-size: 0.95rem; line-height: 1.5; }
-        .btn { display: inline-block; margin-top: 15px; padding: 10px 20px; background: #0284c7; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
-        .btn:hover { background: #0369a1; }
+        body { background: #0f172a; color: #f1f5f9; font-family: monospace; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .back-link { color: #f59e0b; text-decoration: none; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #1e293b; }
+        th, td { border: 1px solid #334155; padding: 10px; text-align: left; }
+        th { background: #0f172a; color: #f59e0b; }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="../portal.html" class="back-link">&larr; Back to Nexus Portal</a>
-        <h1>STORAGE Layer</h1>
-        <p class="sub">Active subsystem interface for storage management and node synchronization.</p>
-        
-        <div class="card">
-            <h3>System Status</h3>
-            <p>Module operational. Connected to decentralized routing peers and state machines.</p>
-            <a href="#" class="btn">Execute Diagnostics</a>
-        </div>
-        
-        <div class="card">
-            <h3>Configuration & Controls</h3>
-            <p>Customize parameters, view telemetry logs, and manage live API tokens.</p>
-            <a href="#" class="btn">Configure Parameters</a>
-        </div>
+        <h1>Decentralized Storage Engine</h1>
+        <p>Object stores, vector indices, and SQLite state databases.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Store Name</th>
+                    <th>Type</th>
+                    <th>Size</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>nexal_social.db</td>
+                    <td>SQLite Async Store</td>
+                    <td>12.4 MB</td>
+                    <td>ONLINE</td>
+                </tr>
+                <tr>
+                    <td>open_claw_cache/</td>
+                    <td>Vector Storage Directory</td>
+                    <td>148.2 MB</td>
+                    <td>SYNCED</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
