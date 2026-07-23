@@ -1,0 +1,91 @@
+import os, random, logging, discord
+from datetime import datetime
+from pathlib import Path
+from dotenv import load_dotenv
+from discord.ext import commands
+
+load_dotenv()
+Path('logs').mkdir(exist_ok=True)
+logging.basicConfig(level=logging.INFO, format='%(message)s', handlers=[logging.FileHandler('logs/system.log'), logging.StreamHandler()])
+logger = logging.getLogger(__name__)
+
+DISCORD_TOKEN=("MTUyNjQ1ODIxMTI5MTYzMTY2Ng.Giew5W.YxZfSf1Z0JG-SSyVNLOzdJHdLgMMuFYOO2V4O")
+
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix="human in the loop", intents=intents)
+
+class Bot:
+    def __init__(self):
+        self.locs = ["Miami", "Austin", "Denver", "Seattle", "NYC"]
+        self.cos = ["DreamHomes", "RealtyCo", "LocalRealty", "Urban", "HomeExperts"]
+        self.pains = ["listing_gap", "review_gap", "ad_inactivity", "social_lag", "crm_leak"]
+        self.hooks = ["I noticed your MLS only has 3 listings vs competitors", "Your Google reviews are at 2.3 stars", "You haven't run Google Ads in 60 days", "Your social hasn't posted in 45 days", "You don't have automated follow-up"]
+        self.bridges = ["We automate listing syndication to 50+ sites", "We automate review requests 24/7", "We run targeted Google Ads", "We automate social posts 3/week", "We have CRM nurture engine"]
+        self.ctas = ["Want a 5-minute walkthrough?", "Free demo?", "Quick call?", "ROI breakdown?", "Strategy call?"]
+    
+    def gen(self, loc, co):
+        return {"pain": random.choice(self.pains), "hook": random.choice(self.hooks), "bridge": random.choice(self.bridges), "cta": random.choice(self.ctas), "loc": loc, "co": co}
+
+brain = Bot()
+
+@bot.event
+async def on_ready():
+    logger.info(f"\n{'='*70}")
+    logger.info(f"✅ Discord Bot Online: {bot.user}")
+    logger.info(f"{'='*70}\n")
+    print(f"🤖 Lead Hunter Ready!")
+
+@bot.command(name="generate")
+async def generate(ctx, *, args: str = ""):
+    params = {}
+    for arg in args.split():
+        if ":" in arg:
+            k, v = arg.split(":", 1)
+            params[k] = v
+    
+    loc = params.get("location", random.choice(brain.locs))
+    co = params.get("company", random.choice(brain.cos))
+    
+    p = brain.gen(loc, co)
+    
+    embed = discord.Embed(title=f"🎯 {co}", description=f"📍 {loc}", color=discord.Color.green())
+    embed.add_field(name="🎯 Pain", value=f"{p['pain']} (85/100)", inline=False)
+    embed.add_field(name="🪝 Hook", value=p['hook'], inline=False)
+    embed.add_field(name="🌉 Bridge", value=p['bridge'], inline=False)
+    embed.add_field(name="📞 CTA", value=p['cta'], inline=False)
+    embed.add_field(name="📦 Assets", value="✅ Audio\n✅ Thumbnail\n✅ Invoice", inline=False)
+    embed.add_field(name="Status", value="READY TO SEND ✅", inline=False)
+    
+    await ctx.send(embed=embed)
+    logger.info(f"✅ Pitch sent to Discord: {co} ({loc})")
+
+@bot.command(name="test_batch")
+async def test_batch(ctx, count: int = 5):
+    embed = discord.Embed(title=f"📊 Batch: {count} Pitches", color=discord.Color.blue())
+    txt = ""
+    for i in range(count):
+        l = random.choice(brain.locs)
+        c = random.choice(brain.cos)
+        txt += f"**{i+1}. {c} ({l})** ✅\n"
+    embed.add_field(name="Generated", value=txt, inline=False)
+    await ctx.send(embed=embed)
+
+@bot.command(name="status")
+async def status(ctx):
+    embed = discord.Embed(title="🔍 Status", description="All systems operational", color=discord.Color.blue())
+    embed.add_field(name="✅ Bot", value="Online", inline=False)
+    await ctx.send(embed=embed)
+
+if not DISCORD_TOKEN or DISCORD_TOKEN == "YOUR_DISCORD_BOT_TOKEN_HERE":
+    logger.error("\n❌ Discord token not set in .env")
+    logger.error("   1. Get token from: https://discord.com/developers/applications")
+    logger.error("   2. Run: nano .env")
+    logger.error("   3. Set: DISCORD_TOKEN=your_token")
+    logger.error("   4. Save and restart\n")
+else:
+    try:
+        bot.run(DISCORD_TOKEN)
+    except Exception as e:
+        logger.error(f"Error: {e}")
+

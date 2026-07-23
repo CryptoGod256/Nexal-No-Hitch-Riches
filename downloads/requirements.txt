@@ -1,0 +1,22 @@
+# Lead Hunter V1 - Python Dependencies
+
+# Core automation
+python-dotenv==1.0.0
+discord.py==2.4.0
+anthropic==0.25.1
+
+# API clients
+requests==2.31.0
+aiohttp==3.9.1
+stripe==7.8.0
+
+# Data handling
+pydantic==2.5.0
+pyyaml==6.0.1
+
+# Logging & monitoring
+python-json-logger==2.0.7
+
+# Utilities
+pytz==2023.3
+click==8.1.7
