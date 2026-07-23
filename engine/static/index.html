@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nexal Intelligence Engine</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <style>
+    body { background: #0a0a0a; color: #e0e0e0; font-family: monospace; text-align: center; }
+    canvas { max-width: 700px; margin: 40px auto; }
+  </style>
+</head>
+<body>
+  <h1>Nexal Intelligence Engine</h1>
+  <canvas id="chart"></canvas>
+  <script>
+    fetch('/api/scan')
+      .then(res => res.json())
+      .then(json => {
+        const data = json.data;
+        new Chart(document.getElementById('chart'), {
+          type: 'bar',
+          data: {
+            labels: data.map(d => d.name),
+            datasets: [{
+              label: 'Potential',
+              data: data.map(d => d.potential),
+              backgroundColor: '#00d4ff'
+            }]
+          }
+        });
+      });
+  </script>
+</body>
+</html>
