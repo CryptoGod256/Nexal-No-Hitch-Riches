@@ -1,28 +1,61 @@
-const express = require('express');
-const app = express();
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
-// Serve static frontend files from project root
-app.use(express.static(__dirname));
-app.use(express.json());
-
-// Health check route
-app.get('/health', (req, res) => {
-    res.json({ status: 'active', gateway: 'Nexal Secure Payment Gateway' });
-});
+const http = require("http");
+const fs = require("fs");
+const path = require("path");
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Nexal Secure Payment Gateway active on port ${PORT}`);
+
+const server = http.createServer((req, res) => {
+  const url = req.url;
+  const method = req.method;
+
+  // 1. WEB ROUTER (Clean URL Handling)
+  if (method === "GET") {
+    if (url === "/" || url === "/index.html") {
+      return serveFile(res, "index.html", "text/html");
+    }
+    if (url === "/sector08" || url === "/cyber-lounge") {
+      return serveFile(res, "index.html", "text/html");
+    }
+    
+    // 2. API ENDPOINTS
+    if (url === "/api/v1/status") {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      return res.end(JSON.stringify({
+        status: "ONLINE",
+        system: "Nexal Intelligence Engine",
+        timestamp: new Date().toISOString()
+      }));
+    }
+  }
+
+  // 3. WEBHOOK RECEIVER (OpenClaw & External Signals)
+  if (method === "POST" && url === "/api/v1/webhook") {
+    let body = "";
+    req.on("data", chunk => { body += chunk.toString(); });
+    req.on("end", () => {
+      console.log("⚡ Webhook Event Received:", body);
+      res.writeHead(200, { "Content-Type": "application/json" });
+      return res.end(JSON.stringify({ received: true, status: "PROCESSED" }));
+    });
+    return;
+  }
+
+  // Fallback 404
+  res.writeHead(404, { "Content-Type": "text/plain" });
+  res.end("404: Nexal Intelligence Node Not Found");
 });
 
-// --- NEXAL DATA CENTER: SOCIAL HUB API ---
-app.get('/api/social-feed', (req, res) => {
-    // Serving live ecosystem status to the front-end nodes
-    res.json({
-        events: [
-            { title: "B2B Client Authenticated", desc: "Enterprise handshake confirmed inside the Nexal data center.", time: "Just now" },
-            { title: "SaaS Pipeline Active", desc: "Data synchronization protocol successful.", time: "12 mins ago" }
-        ]
-    });
+function serveFile(res, filePath, contentType) {
+  fs.readFile(path.join(__dirname, filePath), (err, data) => {
+    if (err) {
+      res.writeHead(500, { "Content-Type": "text/plain" });
+      return res.end("Internal System Error");
+    }
+    res.writeHead(200, { "Content-Type": contentType });
+    res.end(data);
+  });
+}
+
+server.listen(PORT, () => {
+  console.log(`🚀 Nexal Router Engine running on port ${PORT}`);
 });
