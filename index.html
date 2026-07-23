@@ -1110,3 +1110,17 @@
   </script>
 </body>
 </html>
+
+<!-- NEXAL TELEMETRY HUD -->
+<script>
+async function syncNexalStatus() {
+  try {
+    const res = await fetch('/api/v1/status');
+    const data = await res.json();
+    console.log("⚡ Nexal Telemetry Synced:", data);
+  } catch (e) {
+    console.warn("⚠️ Nexal Node offline or disconnected.");
+  }
+}
+document.addEventListener("DOMContentLoaded", syncNexalStatus);
+</script>
