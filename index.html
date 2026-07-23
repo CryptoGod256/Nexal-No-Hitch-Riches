@@ -286,6 +286,7 @@
       <a href="#media">Media Stream</a>
       <a href="#fintech">FinTech Matrix</a>
       <a href="#ecom">E-Commerce</a>
+      <a href="#directory">Directory</a>
     </div>
     <button class="navcta">Enter Portal</button>
   </nav>
@@ -730,6 +731,134 @@
 
     </div>
   </section>
+
+  
+  <!-- ============ SECTOR DIRECTORY & SAAS LOGIC ============ -->
+  <section id="directory" style="border-top:1px solid var(--line);">
+    <div class="section-label">07 // System Directory & SaaS Retainers</div>
+    <h2>Portal Vector Explorer</h2>
+    <p class="section-intro"><strong>Search and filter system sectors, active agents, and transparent retainer models.</strong> Click any entry to inspect real-time compute parameters.</p>
+
+    <!-- Search & Filter Bar -->
+    <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+      <input type="text" id="directorySearch" placeholder="🔍 Search sector, agent, or retainer..." oninput="filterDirectory()" style="flex:1; min-width:260px; background:var(--bg-panel); border:1px solid var(--line); border-radius:20px; padding:12px 18px; color:var(--text); font-family:inherit; font-size:13px; outline:none;">
+      
+      <select id="categoryFilter" onchange="filterDirectory()" style="background:var(--bg-panel); border:1px solid var(--line); border-radius:20px; padding:12px 18px; color:var(--text); font-family:inherit; font-size:13px; outline:none; cursor:pointer;">
+        <option value="ALL">All Categories</option>
+        <option value="SaaS">SaaS Modules</option>
+        <option value="Retainer">Retainer Tiers</option>
+        <option value="Agents">Active Agents</option>
+      </select>
+    </div>
+
+    <!-- Interactive Mobile-Style List Container -->
+    <div id="directoryList" style="margin-top:24px; border:1px solid var(--line); border-radius:6px; background:var(--bg-panel); overflow:hidden;">
+      
+      <!-- Item 1 -->
+      <div class="dir-item" data-cat="SaaS" style="border-bottom:1px solid var(--line);">
+        <div onclick="toggleAccordion('acc1')" style="display:flex; align-items:center; justify-content:space-between; padding:16px; cursor:pointer; user-select:none;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="width:38px; height:38px; border-radius:50%; background:rgba(57,255,242,0.1); border:1px solid var(--cyan); display:flex; align-items:center; justify-content:center; color:var(--cyan); font-weight:700; font-size:12px;">OC</div>
+            <div>
+              <div style="font-weight:700; font-size:14px; color:var(--text);">OpenClaw Vector Scraper</div>
+              <div style="font-size:11px; color:var(--text-dim); margin-top:2px;">SaaS Module • High-Frequency Extraction</div>
+            </div>
+          </div>
+          <span id="acc1-arrow" style="color:var(--text-dim); font-size:16px; transition:transform 0.2s;">❯</span>
+        </div>
+        <div id="acc1" style="display:none; padding:16px; background:var(--bg-card); border-top:1px dashed var(--line); font-size:12px; color:var(--text-dim); line-height:1.6;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+            <div><strong style="color:var(--cyan);">Compute Rate:</strong> 1,200 req/min</div>
+            <div><strong style="color:var(--cyan);">Latency:</strong> 42ms</div>
+            <div><strong style="color:var(--cyan);">Transparent Cost:</strong> $0.002 / 1k vectors</div>
+            <div><strong style="color:var(--cyan);">Status:</strong> Active</div>
+          </div>
+          Scrapes decentralized exchanges, Amazon, and custom API webhooks, piping structured JSON directly to the Pulse Feed.
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="dir-item" data-cat="Retainer" style="border-bottom:1px solid var(--line);">
+        <div onclick="toggleAccordion('acc2')" style="display:flex; align-items:center; justify-content:space-between; padding:16px; cursor:pointer; user-select:none;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="width:38px; height:38px; border-radius:50%; background:rgba(255,26,43,0.1); border:1px solid var(--red); display:flex; align-items:center; justify-content:center; color:var(--red); font-weight:700; font-size:12px;">SE</div>
+            <div>
+              <div style="font-weight:700; font-size:14px; color:var(--text);">Scale Engine Retainer</div>
+              <div style="font-size:11px; color:var(--text-dim); margin-top:2px;">Retainer Tier • $2,500 / mo</div>
+            </div>
+          </div>
+          <span id="acc2-arrow" style="color:var(--text-dim); font-size:16px; transition:transform 0.2s;">❯</span>
+        </div>
+        <div id="acc2" style="display:none; padding:16px; background:var(--bg-card); border-top:1px dashed var(--line); font-size:12px; color:var(--text-dim); line-height:1.6;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+            <div><strong style="color:var(--red);">Included Agents:</strong> 3 Autonomous Workers</div>
+            <div><strong style="color:var(--red);">Dedicated Threads:</strong> 16 Cores</div>
+            <div><strong style="color:var(--red);">Support SLA:</strong> < 15 Min Operator Response</div>
+            <div><strong style="color:var(--red);">Billing Cycle:</strong> Monthly Automated</div>
+          </div>
+          Full transparency guarantee: All API logs, background tasks, and agent decisions are visible in real time via the Pulse Feed.
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="dir-item" data-cat="Agents">
+        <div onclick="toggleAccordion('acc3')" style="display:flex; align-items:center; justify-content:space-between; padding:16px; cursor:pointer; user-select:none;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="width:38px; height:38px; border-radius:50%; background:rgba(192,38,211,0.1); border:1px solid var(--magenta); display:flex; align-items:center; justify-content:center; color:var(--magenta); font-weight:700; font-size:12px;">OA</div>
+            <div>
+              <div style="font-weight:700; font-size:14px; color:var(--text);">Operator Alpha</div>
+              <div style="font-size:11px; color:var(--text-dim); margin-top:2px;">Active Agent • Lead Scoring & Pipeline Sync</div>
+            </div>
+          </div>
+          <span id="acc3-arrow" style="color:var(--text-dim); font-size:16px; transition:transform 0.2s;">❯</span>
+        </div>
+        <div id="acc3" style="display:none; padding:16px; background:var(--bg-card); border-top:1px dashed var(--line); font-size:12px; color:var(--text-dim); line-height:1.6;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+            <div><strong style="color:var(--magenta);">Efficiency Score:</strong> 99.4%</div>
+            <div><strong style="color:var(--magenta);">Tasks Processed:</strong> 14,280</div>
+            <div><strong style="color:var(--magenta);">Memory Hook:</strong> State Machine v3</div>
+            <div><strong style="color:var(--magenta);">Uptime:</strong> 99.98%</div>
+          </div>
+          Monitors incoming leads, scores conversion probability, and triggers automatic operator notifications in Nexus Hub.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    function toggleAccordion(id) {
+      const el = document.getElementById(id);
+      const arrow = document.getElementById(id + '-arrow');
+      if (el.style.display === 'none' || el.style.display === '') {
+        el.style.display = 'block';
+        if (arrow) arrow.style.transform = 'rotate(90deg)';
+      } else {
+        el.style.display = 'none';
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    function filterDirectory() {
+      const query = document.getElementById('directorySearch').value.toLowerCase();
+      const category = document.getElementById('categoryFilter').value;
+      const items = document.querySelectorAll('.dir-item');
+
+      items.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        const cat = item.getAttribute('data-cat');
+        
+        const matchesQuery = text.includes(query);
+        const matchesCat = (category === 'ALL' || cat === category);
+
+        if (matchesQuery && matchesCat) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
 
   <footer>
     <span class="prompt">root@nexal-intel:~$</span> NEXAL INTELLIGENCE // ALL SYSTEMS OPTIMIZED & EXECUTING
