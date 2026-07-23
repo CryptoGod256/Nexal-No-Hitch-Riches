@@ -1,0 +1,7 @@
+{
+  "system": "NEXAL_INTELLIGENCE",
+  "stripeGateway": "ACTIVE",
+  "lowEndBilling": "RECURRING_SUBSCRIPTION_READY",
+  "highEndBilling": "ENTERPRISE_RETAINER_READY",
+  "timestamp": "2026-07-22T08:42:34.468Z"
+}

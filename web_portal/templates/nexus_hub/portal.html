@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS HUB // Central Portal</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #030712; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; min-height: 100vh; background-image: radial-gradient(circle at center, #0f172a 0%, #030712 100%); }
+        header { text-align: center; margin-bottom: 40px; }
+        h1 { font-size: 2.5rem; letter-spacing: 4px; text-transform: uppercase; background: linear-gradient(180deg, #fff 0%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p.subtitle { color: #38bdf8; letter-spacing: 2px; text-transform: uppercase; font-size: 1rem; margin-top: 5px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .card { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 25px; transition: all 0.3s ease; text-decoration: none; color: inherit; display: block; }
+        .card:hover { transform: translateY(-5px); border-color: rgba(56, 189, 248, 0.6); box-shadow: 0 10px 30px rgba(2, 132, 199, 0.3); }
+        .card h3 { color: #38bdf8; margin-bottom: 10px; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 1px; }
+        .card p { color: #94a3b8; font-size: 0.95rem; line-height: 1.5; }
+        .back-link { display: inline-block; margin-bottom: 30px; color: #94a3b8; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .back-link:hover { color: #38bdf8; }
+    </style>
+</head>
+<body>
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <a href="../../index.html" class="back-link">&larr; Back to Main Landing Page</a>
+    </div>
+    <header>
+        <h1>Nexus Hub</h1>
+        <p class="subtitle">User's Central Decentralized Portal</p>
+    </header>
+    <div class="grid">
+        <a href="feed/index.html" class="card">
+            <h3>Feed Engine</h3>
+            <p>Manage posts, interactive threads, and community stories.</p>
+        </a>
+        <a href="streaming/index.html" class="card">
+            <h3>Video & Live Streaming</h3>
+            <p>Broadcast reels, long-form content, and real-time creator tips.</p>
+        </a>
+        <a href="districts/index.html" class="card">
+            <h3>Districts</h3>
+            <p>Explore localized communities, governance forums, and nodes.</p>
+        </a>
+        <a href="metaverse/index.html" class="card">
+            <h3>Metaverse Spaces</h3>
+            <p>Enter 3D virtual rooms, interactive spaces, and live events.</p>
+        </a>
+        <a href="gaming/index.html" class="card">
+            <h3>Gaming Layer</h3>
+            <p>Play decentralized mini-games and trade asset marketplaces.</p>
+        </a>
+        <a href="identity/index.html" class="card">
+            <h3>Identity & Wallet</h3>
+            <p>Manage DID, crypto keys, user reputation, and multi-currency balances.</p>
+        </a>
+        <a href="storage/index.html" class="card">
+            <h3>Decentralized Storage</h3>
+            <p>Inspect IPFS nodes, local caches, and distributed data sync.</p>
+        </a>
+        <a href="saas/index.html" class="card">
+            <h3>B2B SaaS Layer</h3>
+            <p>Configure white-label hubs, API keys, and enterprise managed hosting.</p>
+        </a>
+    </div>
+</body>
+</html>

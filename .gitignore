@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Python Virtual Environments
 venv/
 env/
@@ -25,3 +26,11 @@ Thumbs.db
 # Database & Log Artifacts (Keep directory structure clean)
 *.log
 *.sqlite3-journal
+=======
+venv/
+__pycache__/
+*.pyc
+.env
+*.env
+*.key
+>>>>>>> e153167ad2ad4c8d3f4f9c7f1c9320297f142f70

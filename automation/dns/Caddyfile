@@ -1,0 +1,8 @@
+nexal-intelligence.cloud {
+    # Reverse proxy secure edge traffic to FastAPI core backend
+    reverse_proxy localhost:8000
+    
+    log {
+        output file automation/dns/caddy_access.log
+    }
+}

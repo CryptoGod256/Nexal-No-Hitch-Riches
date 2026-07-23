@@ -1,0 +1,10 @@
+{
+  "cluster": "NEXAL_STRIPE_MONETIZATION_CLUSTER",
+  "nodes": [
+    "stripe_saas_node.js",
+    "stripe_docs_portal.js",
+    "stripe_dispatcher.js"
+  ],
+  "stripeBillingActive": true,
+  "synchronizedAt": "2026-07-22T08:44:26.169Z"
+}
