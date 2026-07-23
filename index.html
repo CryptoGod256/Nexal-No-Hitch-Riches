@@ -866,54 +866,67 @@
   
   <!-- ============ SECTOR 08: SOCIAL & GAMING SAAS SUBPORTALS ============ -->
   <section id="gaming-social" style="border-top:1px solid var(--line);">
-    <div class="section-label">08 // Community Engines & Gaming SaaS</div>
+    <div class="section-label">08 // COMMUNITY ENGINES & GAMING SAAS</div>
     <h2>Social & Gaming Subportals</h2>
     <p class="section-intro"><strong>Accessible SaaS tools for creators, guilds, and streamers.</strong> Automated clip pipelines, Discord bot hosting, tournament telemetry, and social automation retainers priced for everyone.</p>
 
-    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px; margin-top:36px;">
+    <!-- Interactive Social & Guild Directory List -->
+    <div style="background:var(--bg-card); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-top:28px;">
       
-      <!-- Gaming SaaS Portal -->
-      <div class="panel" style="background:var(--bg-card); padding:20px; border-top:3px solid var(--magenta);">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
-          <span style="font-family:'Share Tech Mono'; color:var(--magenta); font-size:12px; letter-spacing:0.1em;">🎮 GAMING SUBPORTAL</span>
-          <span class="live-tag" style="font-size:10px;">SERVERS ONLINE</span>
-        </div>
-        <h3 style="font-size:18px; color:var(--text); margin-bottom:8px;">Guild & Tournament Telemetry</h3>
-        <p style="font-size:12.5px; color:var(--text-dim); line-height:1.6; margin-bottom:16px;">
-          Track esports match stats, automate rank leaderboards, and run autonomous Discord tournament bracket bots.
-        </p>
-        
-        <div style="background:var(--bg-panel); border:1px solid var(--line); border-radius:4px; padding:12px; margin-bottom:16px;">
-          <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px;">
-            <span>Gamer Starter Plan</span>
-            <strong style="color:var(--green); font-family:'Share Tech Mono';">$29 / mo</strong>
-          </div>
-          <div style="font-size:11px; color:var(--text-dim);">1 Bot Instance • Leaderboard Sync • Twitch Webhooks</div>
-        </div>
-        
-        <button class="deploy-btn" onclick="toggleDeploy(this)">Initialize Gaming Portal</button>
+      <div style="padding:14px 18px; background:var(--bg-panel); border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:'Share Tech Mono'; font-size:12px; color:var(--cyan); letter-spacing:0.1em;">ACTIVE SOCIAL NODES & GUILD TELEMETRY</span>
+        <span style="font-size:11px; color:var(--green); font-family:'Share Tech Mono';">● CLAW & BOTS ACTIVE</span>
       </div>
 
-      <!-- Creator & Social Media SaaS Portal -->
-      <div class="panel" style="background:var(--bg-card); padding:20px; border-top:3px solid var(--cyan);">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
-          <span style="font-family:'Share Tech Mono'; color:var(--cyan); font-size:12px; letter-spacing:0.1em;">📡 CREATOR SUBPORTAL</span>
-          <span class="live-tag" style="font-size:10px;">CLAW ACTIVE</span>
-        </div>
-        <h3 style="font-size:18px; color:var(--text); margin-bottom:8px;">Social Automation Suite</h3>
-        <p style="font-size:12.5px; color:var(--text-dim); line-height:1.6; margin-bottom:16px;">
-          Automated stream highlight clipping, cross-platform scheduling (X, TikTok, YouTube Shorts), and follower analytics.
-        </p>
-        
-        <div style="background:var(--bg-panel); border:1px solid var(--line); border-radius:4px; padding:12px; margin-bottom:16px;">
-          <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px;">
-            <span>Creator Pro Pass</span>
-            <strong style="color:var(--cyan); font-family:'Share Tech Mono';">$49 / mo</strong>
+      <!-- Guild & Tournament Node -->
+      <div style="padding:16px 18px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="alert('Accessing Guild & Tournament Telemetry Engine...')">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg, #a000ff, #7000ff); display:flex; align-items:center; justify-content:center; font-weight:bold; font-family:'Share Tech Mono'; color:#fff; font-size:15px;">
+            🎮
           </div>
-          <div style="font-size:11px; color:var(--text-dim);">Auto-Clipping Bot • 5 Social Feeds • Live Chat Relay</div>
+          <div>
+            <div style="font-weight:600; color:var(--text); font-size:14px;">Guild & Tournament Telemetry <span style="font-size:10px; background:rgba(0,255,170,0.15); color:var(--green); padding:2px 6px; border-radius:4px; margin-left:6px;">SERVERS ONLINE</span></div>
+            <div style="font-size:12px; color:var(--text-dim); margin-top:2px;">Track esports stats • Discord tournament bots • Auto rank leaderboards</div>
+          </div>
         </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <strong style="color:var(--purple); font-family:'Share Tech Mono'; font-size:13px;">$29/mo</strong>
+          <span style="color:var(--cyan); font-size:18px;">›</span>
+        </div>
+      </div>
 
-        <button class="deploy-btn" onclick="toggleDeploy(this)" style="background:var(--cyan); color:#050103;">Launch Creator Suite</button>
+      <!-- Social Automation & Clipping Suite -->
+      <div style="padding:16px 18px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="alert('Accessing Social Automation & Clipping Suite...')">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg, #00f2fe, #0099ff); display:flex; align-items:center; justify-content:center; font-weight:bold; font-family:'Share Tech Mono'; color:#000; font-size:15px;">
+            📡
+          </div>
+          <div>
+            <div style="font-weight:600; color:var(--text); font-size:14px;">Social Automation Suite <span style="font-size:10px; background:rgba(0,242,254,0.15); color:var(--cyan); padding:2px 6px; border-radius:4px; margin-left:6px;">CLAW ACTIVE</span></div>
+            <div style="font-size:12px; color:var(--text-dim); margin-top:2px;">Automated stream clipping • Auto-scheduler (X, TikTok, Shorts) • Content Engine</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <strong style="color:var(--cyan); font-family:'Share Tech Mono'; font-size:13px;">$49/mo</strong>
+          <span style="color:var(--cyan); font-size:18px;">›</span>
+        </div>
+      </div>
+
+      <!-- Streamer Telemetry Node -->
+      <div style="padding:16px 18px; display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="alert('Accessing Streamer Overlay & Bot Hosting...')">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg, #ff0055, #ff5500); display:flex; align-items:center; justify-content:center; font-weight:bold; font-family:'Share Tech Mono'; color:#fff; font-size:15px;">
+            ⚡
+          </div>
+          <div>
+            <div style="font-weight:600; color:var(--text); font-size:14px;">Streamer Overlay & Bot Hosting <span style="font-size:10px; background:rgba(255,0,85,0.15); color:var(--red); padding:2px 6px; border-radius:4px; margin-left:6px;">REAL-TIME</span></div>
+            <div style="font-size:12px; color:var(--text-dim); margin-top:2px;">Custom OBS WebSocket widgets • Twitch/Kick chat bots • Multi-relay broadcast</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <strong style="color:var(--yellow); font-family:'Share Tech Mono'; font-size:13px;">$19/mo</strong>
+          <span style="color:var(--cyan); font-size:18px;">›</span>
+        </div>
       </div>
 
     </div>
