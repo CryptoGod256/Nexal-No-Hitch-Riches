@@ -1,0 +1,16 @@
+.env
+*.pyc
+__pycache__/
+*.log
+logs/*.log
+data/*.csv
+data/*.mp3
+data/*.jpg
+data/*.png
+venv/
+.DS_Store
+*.swp
+*.swo
+backups/*
+.idea/
+.vscode/

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexal // Omni Portal</title>
+    <style>
+        :root {
+            --bg-color: #05050a;
+            --neon-cyan: #00f0ff;
+            --neon-pink: #ff007f;
+            --neon-green: #00ff66;
+            --text-main: #c0c0d0;
+            --panel-bg: rgba(10, 10, 20, 0.85);
+            --border-glow: rgba(0, 240, 255, 0.3);
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px dashed var(--neon-cyan);
+            padding-bottom: 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+        h1 {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+        }
+        .status {
+            color: var(--neon-green);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+        .portal-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-glow);
+            padding: 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+        }
+        .portal-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px var(--border-glow);
+            transform: translateY(-3px);
+        }
+        .portal-card h3 {
+            color: var(--neon-pink);
+            margin-top: 0;
+            text-shadow: 0 0 5px rgba(255, 0, 127, 0.4);
+        }
+        .portal-card p {
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        footer {
+            margin-top: auto;
+            padding-top: 30px;
+            font-size: 0.75rem;
+            color: #606080;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>NEXAL // OMNI PORTAL</h1>
+        <div class="status">> SYSTEM: ONLINE // TERMINAL LINK ACTIVE</div>
+    </header>
+
+    <div class="portal-grid">
+        <a href="stream-hub.html" class="portal-card">
+            <h3>[01] STREAM HUB</h3>
+            <p>Access live feeds, real-time interactive chat modules, and media stream telemetry.</p>
+        </a>
+        <a href="nexus-hub.html" class="portal-card">
+            <h3>[02] NEXUS HUB</h3>
+            <p>Core command center for SaaS features, AI-powered tools, and systems data.</p>
+        </a>
+        <a href="cyber-lounge.html" class="portal-card">
+            <h3>[03] CYBER LOUNGE</h3>
+            <p>Community playground, terminal logs, and encrypted social channels.</p>
+        </a>
+    </div>
+
+    <footer>
+        NEXAL-NO-HITCH-RICHES // SECURE INFRASTRUCTURE
+    </footer>
+</body>
+</html>

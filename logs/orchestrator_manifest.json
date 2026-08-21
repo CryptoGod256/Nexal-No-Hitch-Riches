@@ -1,0 +1,11 @@
+{
+  "cluster": "NEXAL_INTELLIGENCE_PRODUCTION_READY",
+  "nodes": [
+    "engine",
+    "pipeline",
+    "collector",
+    "processor",
+    "dispatcher"
+  ],
+  "synchronizedAt": "2026-07-22T08:20:46.853Z"
+}

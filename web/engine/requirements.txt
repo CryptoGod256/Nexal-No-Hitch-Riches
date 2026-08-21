@@ -1,0 +1,7 @@
+cryptography
+requests
+flask
+gunicorn
+python-dotenv
+sqlalchemy
+streamlit

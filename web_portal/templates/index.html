@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXAL INTELLIGENCE // Autonomous Infrastructure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #030712;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: radial-gradient(circle at center, #0f172a 0%, #030712 100%);
+        }
+        .hero-container {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+        .logo-frame {
+            margin-bottom: 30px;
+        }
+        .logo-frame img {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            margin-bottom: 5px;
+            background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: #38bdf8;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+        p {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .cta-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+            transition: all 0.2s ease-in-out;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.6);
+            background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+        }
+        .cta-btn-alt {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-container">
+        <div class="logo-frame">
+            <img src="assets/images/logo_hero.png" alt="Nexal Intelligence Logo">
+        </div>
+        <h1>NEXAL</h1>
+        <h2>INTELLIGENCE</h2>
+        <p>Autonomous Infrastructure & Multi-Agent Routing Engine</p>
+        <div class="cta-buttons">
+            <a href="web_portal/templates/nexus_hub/portal.html" class="cta-btn">Enter Nexus Hub</a>
+            <a href="Goal.md" class="cta-btn cta-btn-alt">Review Mission Roadmap</a>
+        </div>
+    </div>
+</body>
+</html>

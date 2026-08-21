@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>NEXAL // Feed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050103;
+    --bg-panel:#0b0308;
+    --bg-card:#0e0409;
+    --red:#ff1a2b;
+    --red-dim:#7a0f18;
+    --magenta:#c026d3;
+    --cyan:#39fff2;
+    --green:#39ff8a;
+    --amber:#ffb020;
+    --text:#d8d0d2;
+    --text-dim:#6b5c60;
+    --line:#2a1116;
+    --nav-h:64px;
+    --topbar-h:52px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Mono', monospace;
+    overflow:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; -webkit-appearance:none; appearance:none;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  .app{
+    max-width:480px;
+    margin:0 auto;
+    height:100vh;
+    height:100dvh;
+    position:relative;
+    background:var(--bg);
+    border-left:1px solid var(--line);
+    border-right:1px solid var(--line);
+    overflow:hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:repeating-linear-gradient(to bottom, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px);
+    pointer-events:none; z-index:80; mix-blend-mode:overlay;
+  }
+
+  /* ---- Top bar ---- */
+  .topbar{
+    position:absolute; top:0; left:0; right:0; height:var(--topbar-h);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 14px;
+    background:linear-gradient(180deg, rgba(5,1,3,0.95), rgba(5,1,3,0.75) 70%, transparent);
+    z-index:30;
+  }
+  .brand{
+    font-weight:700; font-size:15px; letter-spacing:0.05em; color:var(--red);
+    text-shadow:0 0 10px rgba(255,26,43,0.5);
+  }
+  .brand span{color:var(--text);}
+  .topbar-icons{display:flex; align-items:center; gap:16px;}
+  .icon-btn{background:none; border:none; color:var(--text); font-size:19px; cursor:pointer; position:relative;}
+  .icon-btn .dot{
+    position:absolute; top:-2px; right:-4px; width:7px; height:7px; border-radius:50%;
+    background:var(--red); box-shadow:0 0 6px var(--red);
+  }
+
+  /* ---- Tabs (For You / Following) ---- */
+  .tabs{
+    position:absolute; top:var(--topbar-h); left:0; right:0; z-index:29;
+    display:flex; justify-content:center; gap:26px; padding:8px 0 10px;
+    background:linear-gradient(180deg, rgba(5,1,3,0.5), transparent);
+  }
+  .tab{
+    font-family:'Share Tech Mono', monospace; font-size:13px; letter-spacing:0.08em;
+    color:var(--text-dim); background:none; border:none; cursor:pointer;
+    padding-bottom:6px; border-bottom:2px solid transparent; text-transform:uppercase;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .tab.active{color:var(--text); border-color:var(--red);}
+
+  /* ---- Stories rail ---- */
+  .stories{
+    position:absolute; top:96px; left:0; right:0; z-index:28;
+    display:flex; gap:14px; padding:6px 14px 12px;
+    overflow-x:auto; -ms-overflow-style:none; scrollbar-width:none;
+    background:linear-gradient(180deg, rgba(5,1,3,0.35), transparent);
+  }
+  .stories.hide{display:none;}
+  .stories::-webkit-scrollbar{display:none;}
+  .story{
+    display:flex; flex-direction:column; align-items:center; gap:5px;
+    flex-shrink:0; cursor:pointer;
+  }
+  .story-ring{
+    width:54px; height:54px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--bg);
+    padding:2px;
+  }
+  .story-ring.unseen{
+    background:conic-gradient(var(--red), var(--magenta), var(--cyan), var(--red));
+  }
+  .story-ring.seen{ background:var(--line); }
+  .story-ring .inner{
+    width:100%; height:100%; border-radius:50%; background:var(--bg-panel);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Share Tech Mono', monospace; font-weight:700; font-size:13px; color:var(--cyan);
+  }
+  .story .label{font-size:10px; color:var(--text-dim); max-width:58px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .story.self .story-ring .inner{color:var(--red);}
+  .story.self .plus{
+    position:relative;
+  }
+  .story.self .plus::after{
+    content:"+"; position:absolute; bottom:-2px; right:-2px;
+    width:16px; height:16px; border-radius:50%; background:var(--red);
+    color:#160406; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;
+    border:2px solid var(--bg);
+  }
+
+  /* ---- Vertical snap feed ---- */
+  .feed{
+    position:absolute; inset:0;
+    top:0;
+    overflow-y:scroll;
+    scroll-snap-type:y mandatory;
+    height:100%;
+  }
+  .slide{
+    height:100vh;
+    height:100dvh;
+    width:100%;
+    scroll-snap-align:start;
+    position:relative;
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+  }
+  .slide-bg{
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+  }
+  .slide-scrim{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(5,1,3,0.55) 0%, rgba(5,1,3,0.25) 30%, rgba(5,1,3,0.35) 60%, rgba(5,1,3,0.95) 100%);
+  }
+  .slide-grid{
+    position:absolute; inset:0;
+    background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:36px 36px;
+    opacity:0.25;
+    mix-blend-mode:screen;
+  }
+
+  .slide-content{
+    position:relative; z-index:5;
+    width:100%;
+    padding:0 88px 110px 16px;
+  }
+  .slide-tool{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'Share Tech Mono', monospace; font-size:11px; color:var(--cyan);
+    background:rgba(57,255,242,0.08); border:1px solid rgba(57,255,242,0.3);
+    padding:4px 10px; border-radius:3px; margin-bottom:10px;
+  }
+  .slide-tool::before{content:"⚙";}
+  .slide-user{
+    display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--text); margin-bottom:8px;
+  }
+  .slide-user .handle{color:var(--red); font-weight:700;}
+  .slide-user .follow{
+    margin-left:6px; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--bg); background:var(--red); padding:3px 9px; border-radius:12px; border:none; cursor:pointer;
+  }
+  .slide-title{font-size:16.5px; font-weight:700; color:var(--text); margin-bottom:6px; line-height:1.3;}
+  .slide-desc{font-size:13px; color:var(--text-dim); line-height:1.6; max-width:290px;}
+  .slide-badge{
+    position:absolute; top:150px; left:16px; z-index:6;
+    font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--green);
+    background:rgba(57,255,138,0.08); border:1px solid rgba(57,255,138,0.3);
+    padding:4px 9px; border-radius:12px; display:flex; align-items:center; gap:6px;
+  }
+  .slide-badge::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); animation:blink 1.4s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  /* ---- Right action rail (TikTok pattern) ---- */
+  .rail{
+    position:absolute; right:10px; bottom:120px; z-index:6;
+    display:flex; flex-direction:column; align-items:center; gap:22px;
+  }
+  .rail-btn{
+    background:none; border:none; color:var(--text); display:flex; flex-direction:column; align-items:center; gap:4px;
+    cursor:pointer; font-size:22px;
+  }
+  .rail-btn .n{font-family:'Share Tech Mono', monospace; font-size:11px; color:var(--text-dim);}
+  .rail-btn.like.liked{color:var(--red);}
+  .rail-btn.like.liked .n{color:var(--red);}
+  .rail-btn.remix:hover, .rail-btn.remix:active{color:var(--magenta);}
+  .rail-avatar{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--bg-panel); box-shadow:inset 0 0 0 2px var(--cyan);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Share Tech Mono', monospace; font-size:11px; color:var(--cyan); font-weight:700;
+    margin-bottom:2px;
+  }
+
+  .swipe-hint{
+    position:absolute; right:16px; top:50%; transform:translateY(-50%);
+    z-index:6; display:flex; flex-direction:column; align-items:center; gap:6px;
+    color:var(--text-dim); font-size:10px; letter-spacing:0.1em; opacity:0.7;
+    animation:hintfade 3.5s ease-in-out 1;
+  }
+  .swipe-hint .chev{font-size:16px; animation:bob 1.4s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+  @keyframes hintfade{0%{opacity:0.85;}70%{opacity:0.85;}100%{opacity:0;}}
+
+  /* ---- Bottom nav ---- */
+  .bottomnav{
+    position:absolute; bottom:0; left:0; right:0; height:var(--nav-h); z-index:35;
+    display:flex; align-items:center; justify-content:space-around;
+    background:linear-gradient(0deg, rgba(5,1,3,0.98), rgba(5,1,3,0.9) 80%, transparent);
+    border-top:1px solid var(--line);
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .nav-btn{
+    background:none; border:none; color:var(--text-dim); font-size:21px;
+    display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer;
+  }
+  .nav-btn .label{font-size:9px; letter-spacing:0.05em; text-transform:uppercase; font-family:'Share Tech Mono', monospace;}
+  .nav-btn.active{color:var(--red);}
+  .nav-btn.create{
+    width:46px; height:32px; border-radius:8px;
+    background:linear-gradient(135deg, var(--red), var(--magenta));
+    color:#160406; align-items:center; justify-content:center; font-size:20px; font-weight:700;
+    box-shadow:0 0 14px rgba(255,26,43,0.4);
+  }
+  .nav-btn.create .label{display:none;}
+
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand">NEXAL<span>.feed</span></div>
+    <div class="topbar-icons">
+      <button class="icon-btn" title="Search">🔍</button>
+      <button class="icon-btn" title="Inbox">✉<span class="dot"></span></button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab" id="tab-following">Following</button>
+    <button class="tab active" id="tab-foryou">For You</button>
+  </div>
+
+  <div class="stories" id="stories">
+    <div class="story self">
+      <div class="story-ring seen plus"><div class="inner">YOU</div></div>
+      <div class="label">Your story</div>
+    </div>
+    <div class="story">
+      <div class="story-ring unseen"><div class="inner">RP</div></div>
+      <div class="label">rhea_ops</div>
+    </div>
+    <div class="story">
+      <div class="story-ring unseen"><div class="inner">MK</div></div>
+      <div class="label">maren_builds</div>
+    </div>
+    <div class="story">
+      <div class="story-ring unseen"><div class="inner">DV</div></div>
+      <div class="label">devon_v</div>
+    </div>
+    <div class="story">
+      <div class="story-ring seen"><div class="inner">JT</div></div>
+      <div class="label">jonas_t</div>
+    </div>
+    <div class="story">
+      <div class="story-ring seen"><div class="inner">A1</div></div>
+      <div class="label">Op. A1</div>
+    </div>
+  </div>
+
+  <div class="feed" id="feed">
+
+    <section class="slide">
+      <div class="slide-bg" style="background:radial-gradient(circle at 30% 20%, #2a0810, #050103 70%);"></div>
+      <div class="slide-grid"></div>
+      <div class="slide-scrim"></div>
+      <span class="slide-badge">Live build</span>
+      <div class="swipe-hint"><span class="chev">⌄</span>SWIPE</div>
+      <div class="rail">
+        <div class="rail-avatar">MK</div>
+        <button class="rail-btn like"><span>♥</span><span class="n">128</span></button>
+        <button class="rail-btn comment"><span>💬</span><span class="n">14</span></button>
+        <button class="rail-btn remix"><span>⌥</span><span class="n">Remix</span></button>
+        <button class="rail-btn share"><span>↗</span><span class="n">Share</span></button>
+      </div>
+      <div class="slide-content">
+        <div class="slide-tool">Auto-Market Scanner</div>
+        <div class="slide-user">Maren K. <span class="handle">@maren_builds</span><button class="follow">Follow</button></div>
+        <div class="slide-title">Weekend arbitrage watcher</div>
+        <div class="slide-desc">Wired Auto-Market Scanner into a Slack alert on a 15-min interval — only pings past a 2% spread.</div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-bg" style="background:radial-gradient(circle at 70% 30%, #2a0722, #050103 70%);"></div>
+      <div class="slide-grid"></div>
+      <div class="slide-scrim"></div>
+      <span class="slide-badge" style="color:var(--magenta); background:rgba(192,38,211,0.08); border-color:rgba(192,38,211,0.3);">Remix of Maren K.</span>
+      <div class="rail">
+        <div class="rail-avatar" style="box-shadow:inset 0 0 0 2px var(--magenta); color:var(--magenta);">JT</div>
+        <button class="rail-btn like"><span>♥</span><span class="n">76</span></button>
+        <button class="rail-btn comment"><span>💬</span><span class="n">9</span></button>
+        <button class="rail-btn remix"><span>⌥</span><span class="n">Remix</span></button>
+        <button class="rail-btn share"><span>↗</span><span class="n">Share</span></button>
+      </div>
+      <div class="slide-content">
+        <div class="slide-tool">Auto-Market Scanner</div>
+        <div class="slide-user">Jonas T. <span class="handle">@jonas_t</span><button class="follow">Follow</button></div>
+        <div class="slide-title">Arbitrage watcher, but three exchanges deep</div>
+        <div class="slide-desc">Forked Maren's setup to cross-check three venues before firing — false positives dropped hard.</div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-bg" style="background:radial-gradient(circle at 40% 70%, #072a1c, #050103 70%);"></div>
+      <div class="slide-grid"></div>
+      <div class="slide-scrim"></div>
+      <div class="rail">
+        <div class="rail-avatar" style="box-shadow:inset 0 0 0 2px var(--green); color:var(--green);">RP</div>
+        <button class="rail-btn like liked"><span>♥</span><span class="n">241</span></button>
+        <button class="rail-btn comment"><span>💬</span><span class="n">31</span></button>
+        <button class="rail-btn remix"><span>⌥</span><span class="n">Remix</span></button>
+        <button class="rail-btn share"><span>↗</span><span class="n">Share</span></button>
+      </div>
+      <div class="slide-content">
+        <div class="slide-tool">Deep Data Analyzer</div>
+        <div class="slide-user">Rhea P. <span class="handle">@rhea_ops</span><button class="follow">Follow</button></div>
+        <div class="slide-title">Portfolio drift dashboard</div>
+        <div class="slide-desc">Flags any position drifting more than 5% from target allocation, straight off Deep Data Analyzer.</div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-bg" style="background:radial-gradient(circle at 60% 25%, #2a1a07, #050103 70%);"></div>
+      <div class="slide-grid"></div>
+      <div class="slide-scrim"></div>
+      <span class="slide-badge">Live build</span>
+      <div class="rail">
+        <div class="rail-avatar" style="box-shadow:inset 0 0 0 2px var(--amber); color:var(--amber);">DV</div>
+        <button class="rail-btn like"><span>♥</span><span class="n">303</span></button>
+        <button class="rail-btn comment"><span>💬</span><span class="n">42</span></button>
+        <button class="rail-btn remix"><span>⌥</span><span class="n">Remix</span></button>
+        <button class="rail-btn share"><span>↗</span><span class="n">Share</span></button>
+      </div>
+      <div class="slide-content">
+        <div class="slide-tool">Open Claw</div>
+        <div class="slide-user">Devon V. <span class="handle">@devon_v</span><button class="follow">Follow</button></div>
+        <div class="slide-title">Open Claw grocery run</div>
+        <div class="slide-desc">Set Open Claw to reorder pantry staples when tracked items run low. Small win, saves a Sunday errand.</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="bottomnav">
+    <button class="nav-btn active" data-label="Home"><span>⌂</span><span class="label">Home</span></button>
+    <button class="nav-btn" data-label="Discover"><span>◈</span><span class="label">Discover</span></button>
+    <button class="nav-btn create">+</button>
+    <button class="nav-btn" data-label="Signals"><span>▲</span><span class="label">Signals</span></button>
+    <button class="nav-btn" data-label="Profile"><span>◉</span><span class="label">Profile</span></button>
+  </div>
+
+</div>
+
+<script>
+  // Like toggle
+  document.querySelectorAll('.rail-btn.like').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const n = btn.querySelector('.n');
+      let val = parseInt(n.textContent, 10);
+      const liked = btn.classList.toggle('liked');
+      n.textContent = liked ? val+1 : val-1;
+    });
+  });
+
+  // Tabs
+  const tabFY = document.getElementById('tab-foryou');
+  const tabFL = document.getElementById('tab-following');
+  const stories = document.getElementById('stories');
+  tabFY.addEventListener('click', ()=>{
+    tabFY.classList.add('active'); tabFL.classList.remove('active');
+    stories.classList.remove('hide');
+  });
+  tabFL.addEventListener('click', ()=>{
+    tabFL.classList.add('active'); tabFY.classList.remove('active');
+  });
+
+  // Bottom nav active state
+  document.querySelectorAll('.bottomnav .nav-btn:not(.create)').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.bottomnav .nav-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // Follow button state
+  document.querySelectorAll('.follow').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const following = btn.textContent === 'Following';
+      btn.textContent = following ? 'Follow' : 'Following';
+      btn.style.background = following ? 'var(--red)' : 'transparent';
+      btn.style.border = following ? 'none' : '1px solid var(--text-dim)';
+      btn.style.color = following ? 'var(--bg)' : 'var(--text)';
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "system": "NEXAL_INTELLIGENCE",
+  "objective": "REAL_TIME_WEBHOOK_EVENT_DISPATCH",
+  "status": "ACTIVE_AND_LISTENING",
+  "supportedEvents": [
+    "stripe.subscription.created",
+    "stripe.invoice.payment_succeeded",
+    "enterprise.retainer.provisioned",
+    "open_claw.target.acquired"
+  ],
+  "dispatchedAt": "2026-07-22T13:22:07.965Z"
+}

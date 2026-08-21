@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { background: #050103; color: #d8d0d2; font-family: monospace; margin: 0; }
+  .app { max-width: 480px; margin: 0 auto; height: 100vh; position: relative; border-left: 1px solid #2a1116; border-right: 1px solid #2a1116; overflow: hidden; }
+  .feed { height: 100%; overflow-y: scroll; scroll-snap-type: y mandatory; }
+  .slide { height: 100vh; width: 100%; scroll-snap-align: start; position: relative; display: flex; align-items: flex-end; padding: 20px; }
+  .slide-content { background: rgba(0,0,0,0.7); padding: 15px; border: 1px solid #ff1a2b; width: 100%; }
+  .slide-tool { color: #39fff2; font-size: 11px; }
+  .slide-title { color: #ff1a2b; font-size: 18px; margin: 5px 0; }
+  .slide-desc { color: #d8d0d2; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="feed" id="feed">
+    <!-- Signals will load here -->
+  </div>
+</div>
+<script>
+  async function loadSignals() {
+    try {
+      const res = await fetch('/api/signals.json');
+      const data = await res.json();
+      document.getElementById('feed').innerHTML = data.map(s => `
+        <section class="slide">
+          <div class="slide-content">
+            <div class="slide-tool">${s.tool}</div>
+            <div class="slide-title">${s.title}</div>
+            <div class="slide-desc">${s.description}</div>
+          </div>
+        </section>
+      `).join('');
+    } catch (e) { console.error("Fetch failed:", e); }
+  }
+  loadSignals();
+</script>
+</body>
+</html>

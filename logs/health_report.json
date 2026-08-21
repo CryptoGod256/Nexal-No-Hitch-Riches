@@ -1,0 +1,13 @@
+{
+  "system": "NEXAL_INTELLIGENCE",
+  "healthStatus": "OPTIMAL",
+  "memoryUsage": {
+    "rss": 44941312,
+    "heapTotal": 6164480,
+    "heapUsed": 3917552,
+    "external": 1522589,
+    "arrayBuffers": 71933
+  },
+  "uptime": 0.312785,
+  "checkedAt": "2026-07-22T08:24:50.785Z"
+}
